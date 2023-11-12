@@ -14,6 +14,6 @@ namespace OnionApiUpgradeBogus.Domain.Entities
         public string ContactName { get; set; }
         public Guid AddressId { get; set; }
         public Address? Address { get; set; }
-        public IEnumerable<Order> Orders { get; set; }
+        public IList<Order> Orders { get; set; }
     }
 }
