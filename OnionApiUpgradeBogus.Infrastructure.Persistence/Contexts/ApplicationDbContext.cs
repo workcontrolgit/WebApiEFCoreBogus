@@ -16,32 +16,16 @@ namespace OnionApiUpgradeBogus.Infrastructure.Persistence.Contexts
         private readonly IDateTimeService _dateTime;
         private readonly ILoggerFactory _loggerFactory;
 
-        private readonly Fakers _fakers;
-
-        private readonly IMockService _mockService;
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,
             IDateTimeService dateTime,
-            Fakers fakers,
-            IMockService mockService,
             ILoggerFactory loggerFactory
             ) : base(options)
         {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             _dateTime = dateTime;
             _loggerFactory = loggerFactory;
-            _fakers = fakers;
-            _mockService = mockService;
         }
-
-        //public DbSet<Position> Positions { get; set; }
-
-        //public DbSet<Customer> Customers { get; set; }
-        //public DbSet<Address> Addresses { get; set; }
-        //public DbSet<Order> Orders { get; set; }
-        //public DbSet<OrderItem> OrderItems { get; set; }
-
-
 
         public DbSet<Customer> Customers => Set<Customer>();
         public DbSet<Address> Addresses => Set<Address>();
@@ -76,35 +60,8 @@ namespace OnionApiUpgradeBogus.Infrastructure.Persistence.Contexts
             var _mockData = this.Database.GetService<IMockService>();
             var seedPositions = _mockData.SeedPositions(1000);
 
-            var _fakers = this.Database.GetService<Fakers>();
-
-            //var _mockData = this.Database.GetService<IMockService>();
-
-            //if (_mockService != null)
-            //{
-            //    var seedPositions2 = _mockService.SeedPositions(1000);
-            //}
-            //if (_fakers != null)
-            //{
-            //    var customers2 = _fakers.GetCustomerGenerator(false).Generate(50);
-            //}
-
-
             modelBuilder.Entity<Position>().HasData(seedPositions);
 
-            var addresses = _fakers.GetAddressGenerator().Generate(50);
-
-            modelBuilder.Entity<Address>().HasData(addresses);
-
-            var customers = _fakers.GetCustomerGenerator(false).Generate(50);
-
-            for (var x = 0; x < customers.Count; ++x)
-            {
-                customers[x].AddressId = addresses[x].Id;
-            }
-
-            modelBuilder.Entity<Customer>()
-                .HasData(customers);
 
             // Configure the tables
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
@@ -115,6 +72,13 @@ namespace OnionApiUpgradeBogus.Infrastructure.Persistence.Contexts
             var databaseSeeder = new DatabaseSeeder();
 
             // Apply the seed data on the tables
+            modelBuilder.Entity<Address>().HasData(databaseSeeder.Addresses);
+            modelBuilder.Entity<Customer>().HasData(databaseSeeder.Customers);
+
+            modelBuilder.Entity<Order>().HasData(databaseSeeder.Orders);
+            modelBuilder.Entity<OrderItem>().HasData(databaseSeeder.OrderItems);
+
+
             modelBuilder.Entity<Product>().HasData(databaseSeeder.Products);
             modelBuilder.Entity<ProductCategory>().HasData(databaseSeeder.ProductCategories);
             modelBuilder.Entity<ProductProductCategory>().HasData(databaseSeeder.ProductProductCategories);

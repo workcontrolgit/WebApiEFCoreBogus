@@ -1,9 +1,12 @@
-﻿namespace OnionApiUpgradeBogus.Domain.Entities;
+﻿using OnionApiUpgradeBogus.Domain.Common;
+using System;
 
-public class ProductProductCategory
+namespace OnionApiUpgradeBogus.Domain.Entities;
+
+public class ProductProductCategory : AuditableBaseEntity
 {
-    public int ProductId { get; set; }
-    public int CategoryId { get; set; }
+    public Guid ProductId { get; set; }
+    public Guid CategoryId { get; set; }
 
     public Product Product { get; set; } = null!;
     public ProductCategory Category { get; set; } = null!;

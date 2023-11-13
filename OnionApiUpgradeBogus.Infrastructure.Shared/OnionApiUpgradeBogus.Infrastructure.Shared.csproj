@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\Fakers.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoBogus" Version="2.13.1" />
     <PackageReference Include="Bogus" Version="34.0.2" />
     <PackageReference Include="MailKit" Version="3.4.3" />

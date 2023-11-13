@@ -82,30 +82,9 @@ namespace OnionApiUpgradeBogus.Application.Features.Employees.Queries.GetEmploye
             var data = entityEmployees.data;
             RecordsCount recordCount = entityEmployees.recordsCount;
 
-            GenerateUserProfileDataWithAutoBogusWithoutRules();
-
             // response wrapper
             return new PagedResponse<IEnumerable<Entity>>(data, validFilter.PageNumber, validFilter.PageSize, recordCount);
         }
 
-        public void GenerateUserProfileDataWithAutoBogusWithoutRules()
-        {
-            //Tell AutoFaker to use the default conventions for generated data
-            //If we don't do this, it will just generate data based on a property's data type
-            //rather than also considering other factors like an object property's name
-            AutoFaker.Configure(builder =>
-            {
-                builder.WithConventions();
-            });
-            //Call an instance of AutoBogus' AutoFaker class and define our rule for emails
-            var userProfileFaker = new AutoFaker<UserProfile>();
-
-            var userProfiles = userProfileFaker.Generate(50);
-
-            //Dump our list of user info objects to the test output with readable output as JSON
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            Console.WriteLine(JsonSerializer.Serialize(userProfiles, options));
-
-        }
     }
 }

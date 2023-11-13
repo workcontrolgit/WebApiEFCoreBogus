@@ -1,11 +1,11 @@
-﻿using System;
+﻿using OnionApiUpgradeBogus.Domain.Common;
+using System;
 using System.Collections.Generic;
 
 namespace OnionApiUpgradeBogus.Domain.Entities;
 
-public class Product
+public class Product : AuditableBaseEntity
 {
-    public int Id { get; set; }
     public string Name { get; set; } = null!;
     public DateTimeOffset CreationDate { get; set; }
     public ICollection<ProductProductCategory> ProductProductCategories { get; set; } = new List<ProductProductCategory>();

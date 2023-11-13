@@ -15,8 +15,8 @@ namespace OnionApiUpgradeBogus.Infrastructure.Shared.Mock
             RuleFor(o => o.PositionDescription, f => f.Name.JobDescriptor());
             RuleFor(o => o.PositionSalary, f => f.Finance.Amount());
             RuleFor(o => o.Created, f => f.Date.Past(1));
-            RuleFor(o => o.CreatedBy, f => f.Name.FullName());
-            RuleFor(o => o.LastModified, f => f.Date.Recent(1));
+            RuleFor(o => o.CreatedBy, f => f.Internet.UserName());
+            RuleFor(o => o.LastModified, f => f.Date.Recent());
             RuleFor(o => o.LastModifiedBy, f => f.Name.FullName());
         }
     }

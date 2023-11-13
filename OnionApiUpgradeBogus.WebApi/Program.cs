@@ -43,7 +43,7 @@ try
     // API explorer version
     builder.Services.AddVersionedApiExplorerExtension();
 
-    builder.Services.AddTransient<Fakers>();
+    // builder.Services.AddTransient<Fakers>();
 
     var app = builder.Build();
 
