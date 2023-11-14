@@ -1,4 +1,5 @@
 ﻿using OnionApiUpgradeBogus.Domain.Common;
+using System.Collections.Generic;
 
 namespace OnionApiUpgradeBogus.Domain.Entities;
 

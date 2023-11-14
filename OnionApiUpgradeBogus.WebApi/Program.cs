@@ -92,7 +92,7 @@ try
 }
 catch (Exception ex)
 {
-    Log.Warning(ex, "An error occurred starting the application");
+    Log.Warning(ex, ex.Message);
 }
 finally
 {

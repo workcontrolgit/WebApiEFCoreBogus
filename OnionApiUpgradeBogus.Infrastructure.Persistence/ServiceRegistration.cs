@@ -21,9 +21,11 @@ namespace OnionApiUpgradeBogus.Infrastructure.Persistence
             else
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
-               options.UseSqlServer(
-                   configuration.GetConnectionString("DefaultConnection"),
-                   b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+                    options
+                    .UseSqlServer(
+                        configuration.GetConnectionString("DefaultConnection"),
+                            b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName))
+                    .EnableSensitiveDataLogging());
             }
 
             #region Repositories

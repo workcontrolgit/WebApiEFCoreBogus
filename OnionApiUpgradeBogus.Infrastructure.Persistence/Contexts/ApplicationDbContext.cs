@@ -27,6 +27,7 @@ namespace OnionApiUpgradeBogus.Infrastructure.Persistence.Contexts
             _loggerFactory = loggerFactory;
         }
 
+        public DbSet<Position> Positions => Set<Position>();
         public DbSet<Customer> Customers => Set<Customer>();
         public DbSet<Address> Addresses => Set<Address>();
         public DbSet<Order> Orders => Set<Order>();
@@ -64,6 +65,7 @@ namespace OnionApiUpgradeBogus.Infrastructure.Persistence.Contexts
 
 
             // Configure the tables
+            // modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new ProductProductCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new ProductCategoryConfiguration());
@@ -99,7 +101,7 @@ namespace OnionApiUpgradeBogus.Infrastructure.Persistence.Contexts
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.ToTable("Product");
+            builder.ToTable("Products");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.CreationDate).IsRequired();
@@ -111,7 +113,7 @@ namespace OnionApiUpgradeBogus.Infrastructure.Persistence.Contexts
     {
         public void Configure(EntityTypeBuilder<ProductCategory> builder)
         {
-            builder.ToTable("ProductCategory");
+            builder.ToTable("ProductCategories");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).IsRequired();
         }
@@ -121,7 +123,7 @@ namespace OnionApiUpgradeBogus.Infrastructure.Persistence.Contexts
     {
         public void Configure(EntityTypeBuilder<ProductProductCategory> builder)
         {
-            builder.ToTable("ProductProductCategory");
+            builder.ToTable("ProductProductCategories");
 
             builder.HasKey(x => new { x.ProductId, x.CategoryId });
 
@@ -134,4 +136,14 @@ namespace OnionApiUpgradeBogus.Infrastructure.Persistence.Contexts
                 .HasForeignKey(x => x.CategoryId);
         }
     }
+
+    //internal class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
+    //{
+    //    public void Configure(EntityTypeBuilder<OrderItem> builder)
+    //    {
+    //        builder.ToTable("OrderItems");
+    //        builder.HasKey(x => x.Id);
+    //    }
+    //}
+
 }
