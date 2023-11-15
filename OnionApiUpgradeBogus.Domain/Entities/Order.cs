@@ -11,6 +11,6 @@ namespace OnionApiUpgradeBogus.Domain.Entities
         public DateTime OrderDate { get; set; }
         public Terms Terms { get; set; }
         public Guid CustomerId { get; set; }
-        public IList<OrderItem> OrderItems { get; set; }
+        public IList<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }
 }
