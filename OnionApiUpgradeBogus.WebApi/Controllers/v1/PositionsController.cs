@@ -1,14 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OnionApiUpgradeBogus.Application.Features.Positions.Commands.CreatePosition;
-using OnionApiUpgradeBogus.Application.Features.Positions.Commands.DeletePositionById;
-using OnionApiUpgradeBogus.Application.Features.Positions.Commands.UpdatePosition;
-using OnionApiUpgradeBogus.Application.Features.Positions.Queries.GetPositionById;
-using OnionApiUpgradeBogus.Application.Features.Positions.Queries.GetPositions;
 using OnionApiUpgradeBogus.WebApi.Extensions;
-using System;
-using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

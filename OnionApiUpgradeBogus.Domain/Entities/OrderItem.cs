@@ -1,6 +1,5 @@
 ﻿using OnionApiUpgradeBogus.Domain.Common;
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnionApiUpgradeBogus.Domain.Entities
 {

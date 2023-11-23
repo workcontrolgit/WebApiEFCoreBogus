@@ -20,14 +20,16 @@ namespace OnionApiUpgradeBogus.Infrastructure.Persistence.Repositories
         private readonly DbSet<Customer> _customers;
         private IDataShapeHelper<Customer> _dataShaper;
         private readonly IMockService _mockData;
+        private readonly ICustomerDocumentAsync _customerDocument;
 
         public CustomerRepositoryAsync(ApplicationDbContext dbContext,
-            IDataShapeHelper<Customer> dataShaper, IMockService mockData) : base(dbContext)
+            IDataShapeHelper<Customer> dataShaper, IMockService mockData, ICustomerDocumentAsync customerDocument) : base(dbContext)
         {
             _dbContext = dbContext;
             _customers = dbContext.Set<Customer>();
             _dataShaper = dataShaper;
             _mockData = mockData;
+            _customerDocument = customerDocument;
         }
 
         public async Task<bool> IsUniqueCustomerNumberAsync(string companyName)
@@ -83,12 +85,17 @@ namespace OnionApiUpgradeBogus.Infrastructure.Persistence.Repositories
             {
                 result = result.OrderBy(orderBy);
             }
+            //Including multiple levels
+            result = result.Include(customer => customer.Orders).ThenInclude(order => order.OrderItems);
+
 
             // select columns
             if (!string.IsNullOrWhiteSpace(fields))
             {
                 result = result.Select<Customer>("new(" + fields + ")");
             }
+
+
             // paging
             result = result
                 .Skip((pageNumber - 1) * pageSize)

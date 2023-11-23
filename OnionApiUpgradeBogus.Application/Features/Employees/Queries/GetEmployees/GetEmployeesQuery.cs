@@ -1,15 +1,11 @@
-﻿using AutoBogus;
-using AutoBogus.Conventions;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using OnionApiUpgradeBogus.Application.Interfaces;
 using OnionApiUpgradeBogus.Application.Interfaces.Repositories;
 using OnionApiUpgradeBogus.Application.Parameters;
 using OnionApiUpgradeBogus.Application.Wrappers;
 using OnionApiUpgradeBogus.Domain.Entities;
-using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 

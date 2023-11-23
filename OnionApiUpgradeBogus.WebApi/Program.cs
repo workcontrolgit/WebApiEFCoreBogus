@@ -1,16 +1,10 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using OnionApiUpgradeBogus.Application;
 using OnionApiUpgradeBogus.Infrastructure.Persistence;
 using OnionApiUpgradeBogus.Infrastructure.Persistence.Contexts;
 using OnionApiUpgradeBogus.Infrastructure.Shared;
-using OnionApiUpgradeBogus.Infrastructure.Shared.Services;
 using OnionApiUpgradeBogus.WebApi.Extensions;
 using Serilog;
-using System;
+using OnionApiUpgradedBogus.Infrastructure.Elastic;
 
 try
 {
@@ -27,10 +21,14 @@ try
     builder.Services.AddApplicationLayer();
     builder.Services.AddPersistenceInfrastructure(builder.Configuration);
     builder.Services.AddSharedInfrastructure(builder.Configuration);
+    // Elastic Search
+    builder.Services.AddElasticsearch(builder.Configuration);
+    // Swagger
     builder.Services.AddSwaggerExtension();
     builder.Services.AddControllersExtension();
     // CORS
     builder.Services.AddCorsExtension();
+    // Health
     builder.Services.AddHealthChecks();
     //API Security
     builder.Services.AddJWTAuthentication(builder.Configuration);
@@ -42,6 +40,7 @@ try
         .AddApiExplorer();
     // API explorer version
     builder.Services.AddVersionedApiExplorerExtension();
+
 
     // builder.Services.AddTransient<Fakers>();
 

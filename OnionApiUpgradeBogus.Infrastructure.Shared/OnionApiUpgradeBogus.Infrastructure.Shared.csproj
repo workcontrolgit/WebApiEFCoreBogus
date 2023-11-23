@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\AddressFaker.cs" />
     <Compile Remove="Services\Fakers.cs" />
   </ItemGroup>
 

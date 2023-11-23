@@ -1,14 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OnionApiUpgradeBogus.Application.Features.Customers.Commands.CreateCustomer;
-using OnionApiUpgradeBogus.Application.Features.Customers.Commands.DeleteCustomerById;
-using OnionApiUpgradeBogus.Application.Features.Customers.Commands.UpdateCustomer;
-using OnionApiUpgradeBogus.Application.Features.Customers.Queries.GetCustomerById;
-using OnionApiUpgradeBogus.Application.Features.Customers.Queries.GetCustomers;
+using Nest;
 using OnionApiUpgradeBogus.WebApi.Extensions;
-using System;
-using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,6 +10,14 @@ namespace OnionApiUpgradeBogus.WebApi.Controllers.v1
     [ApiVersion("1.0")]
     public class CustomersController : BaseApiController
     {
+        private readonly IElasticClient _elasticClient;
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+        public CustomersController(IElasticClient elasticClient, IWebHostEnvironment hostingEnvironment)
+        {
+            _elasticClient = elasticClient;
+            _hostingEnvironment = hostingEnvironment;
+        }
 
         /// <summary>
         /// Gets a list of positions based on the provided filter.
@@ -26,6 +27,7 @@ namespace OnionApiUpgradeBogus.WebApi.Controllers.v1
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] GetCustomersQuery filter)
         {
+            Import.ImportJson(_hostingEnvironment, _elasticClient);
             return Ok(await Mediator.Send(filter));
         }
 

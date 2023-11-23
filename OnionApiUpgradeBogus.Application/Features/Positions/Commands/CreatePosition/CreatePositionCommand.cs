@@ -3,14 +3,13 @@ using MediatR;
 using OnionApiUpgradeBogus.Application.Interfaces.Repositories;
 using OnionApiUpgradeBogus.Application.Wrappers;
 using OnionApiUpgradeBogus.Domain.Entities;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace OnionApiUpgradeBogus.Application.Features.Positions.Commands.CreatePosition
 {
 
-    public partial class CreatePositionCommand: Position, IRequest<Response<Position>>
+    public partial class CreatePositionCommand : Position, IRequest<Response<Position>>
     {
     }
 

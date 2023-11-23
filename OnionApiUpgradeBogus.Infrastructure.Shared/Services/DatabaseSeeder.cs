@@ -1,6 +1,4 @@
-﻿using AutoBogus;
-using Bogus;
-using Bogus.DataSets;
+﻿using Bogus;
 using OnionApiUpgradeBogus.Domain.Entities;
 using OnionApiUpgradeBogus.Domain.Enums;
 using System;
@@ -93,6 +91,7 @@ namespace OnionApiUpgradeBogus.Infrastructure.Shared.Services
         private static IReadOnlyCollection<Customer> GenerateCustomers(int amount, IEnumerable<Address> addresses)
         {
             var faker = new Faker<Customer>()
+                  .UseSeed(1969) // Use any number
                   .RuleFor(r => r.Id, f => Guid.NewGuid())
                   .RuleFor(r => r.CompanyName, f => f.Company.CompanyName())
                   .RuleFor(r => r.ContactName, f => f.Name.FullName())
@@ -110,6 +109,7 @@ namespace OnionApiUpgradeBogus.Infrastructure.Shared.Services
         private static IReadOnlyCollection<Product> GenerateProducts(int amount)
         {
             var faker = new Faker<Product>()
+                .UseSeed(1969) // Use any number
                 .RuleFor(r => r.Id, f => Guid.NewGuid()) // Each product will have an incrementing id.
                 .RuleFor(r => r.Name, f => f.Commerce.ProductName())
                 // The refDate is very important! Without it, it will generate a random date based on the CURRENT date on your system.
@@ -128,6 +128,7 @@ namespace OnionApiUpgradeBogus.Infrastructure.Shared.Services
         private static IReadOnlyCollection<ProductCategory> GenerateProductCategories(int amount)
         {
             var faker = new Faker<ProductCategory>()
+                .UseSeed(1969) // Use any number
                 .RuleFor(r => r.Id, f => Guid.NewGuid()) // Each category will have an incrementing id.
                 .RuleFor(r => r.Name, f => f.Commerce.Categories(1).First())
                   .RuleFor(r => r.Created, f => f.Date.Recent())
@@ -145,6 +146,7 @@ namespace OnionApiUpgradeBogus.Infrastructure.Shared.Services
             // Now we set up the faker for our join table.
             // We do this by grabbing a random product and category that were generated.
             var faker = new Faker<ProductProductCategory>()
+                .UseSeed(1969) // Use any number
                 .RuleFor(r => r.ProductId, f => f.PickRandom(products).Id)
                 .RuleFor(r => r.CategoryId, f => f.PickRandom(productCategories).Id);
 
@@ -154,12 +156,6 @@ namespace OnionApiUpgradeBogus.Infrastructure.Shared.Services
                 .ToList();
 
 
-        }
-
-        private static T SeedRow<T>(Faker<T> faker, int rowId) where T : class
-        {
-            var recordRow = faker.UseSeed(rowId).Generate();
-            return recordRow;
         }
     }
 }

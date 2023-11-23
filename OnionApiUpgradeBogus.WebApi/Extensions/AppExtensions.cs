@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using OnionApiUpgradeBogus.WebApi.Middlewares;
+﻿using OnionApiUpgradeBogus.WebApi.Middlewares;
 
 namespace OnionApiUpgradeBogus.WebApi.Extensions
 {

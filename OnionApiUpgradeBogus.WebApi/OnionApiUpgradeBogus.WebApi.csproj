@@ -23,6 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Extensions\ElasticSearchExtension.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.2" />
     <PackageReference Include="IdentityModel" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.4" />
@@ -36,6 +40,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="7.0.5" />
+    <PackageReference Include="NEST" Version="7.17.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Serilog.Expressions" Version="3.4.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
@@ -45,6 +51,7 @@
   <ItemGroup>
     <ProjectReference Include="..\OnionApiUpgradeBogus.Infrastructure.Persistence\OnionApiUpgradeBogus.Infrastructure.Persistence.csproj" />
     <ProjectReference Include="..\OnionApiUpgradeBogus.Infrastructure.Shared\OnionApiUpgradeBogus.Infrastructure.Shared.csproj" />
+    <ProjectReference Include="..\OnionApiUpgradedBogus.Infrastructure.Elastic\OnionApiUpgradedBogus.Infrastructure.Elastic.csproj" />
   </ItemGroup>
 
   <ItemGroup>

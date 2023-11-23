@@ -1,5 +1,4 @@
 ﻿using OnionApiUpgradeBogus.Domain.Entities;
-using System;
 
 namespace OnionApiUpgradeBogus.Application.Features.Customers.Queries.GetCustomers
 {
